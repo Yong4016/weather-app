@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
+body {
+  background: url(https://c4.wallpaperflare.com/wallpaper/761/613/75/abstract-sky-sun-clouds-wallpaper-thumb.jpg);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100vh;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+}
+.weather-box {
+  border: 3px solid white;
+  padding: 50px;
+  border-radius: 32px;
+  background: linear-gradient(to right, #c2c0c0, #70a1ff);
+  margin-bottom: 12px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.selectors {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-box {
+  border: 3px solid white;
+  padding: 50px;
+  margin: 20px auto;
+  border-radius: 32px;
+  background: linear-gradient(to right, #c2c0c0, #70a1ff);
+  margin-bottom: 12px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.weather-box h3,
+.weather-box h5 {
+  margin: 5px 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.selectors {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
 }
