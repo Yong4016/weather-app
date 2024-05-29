@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Selector from './component/Selector';
@@ -13,30 +13,33 @@ function App() {
   const cities = ['Sydney', 'Paris', 'London', 'New York'];
   const API_KEY = process.env.REACT_APP_API_KEY;
 
-  const getWeatherByCoords = async (lat: number, lon: number) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-    setLoading(true);
-    const response = await fetch(url);
-    const data: WeatherData = await response.json();
-    setWeather(data);
-    setLoading(false);
-  };
+  const getWeatherByCoords = useCallback(
+    async (lat: number, lon: number) => {
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+      setLoading(true);
+      const response = await fetch(url);
+      const data: WeatherData = await response.json();
+      setWeather(data);
+      setLoading(false);
+    },
+    [API_KEY]
+  );
 
-  const getCurrentLocation = () => {
+  const getCurrentLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       getWeatherByCoords(latitude, longitude);
     });
-  };
+  }, [getWeatherByCoords]);
 
-  const getWeatherByCity = async () => {
+  const getWeatherByCity = useCallback(async () => {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
     setLoading(true);
     const response = await fetch(url);
     const data: WeatherData = await response.json();
     setWeather(data);
     setLoading(false);
-  };
+  }, [city, API_KEY]);
 
   const handleCityChange = (city: string) => {
     if (city === 'current') {
@@ -52,7 +55,7 @@ function App() {
     } else {
       getWeatherByCity();
     }
-  }, [city]);
+  }, [city, getCurrentLocation, getWeatherByCity]);
 
   return (
     <>
